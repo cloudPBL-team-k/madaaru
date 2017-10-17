@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
+
 namespace Code_Scan_Test_by_ZXing.iOS
 {
     [Register("AppDelegate")]
@@ -13,7 +14,7 @@ namespace Code_Scan_Test_by_ZXing.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-
+            global::ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

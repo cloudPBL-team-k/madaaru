@@ -8,7 +8,8 @@ namespace Code_Scan_Test_by_ZXing
         {
             InitializeComponent();
 
-            MainPage = new Code_Scan_Test_by_ZXingPage();
+//            MainPage = new Code_Scan_Test_by_ZXingPage();
+            MainPage = new NavigationPage(new Code_Scan_Test_by_ZXingPage());
         }
 
         protected override void OnStart()
