@@ -9,7 +9,7 @@ namespace Code_Scan_Test_by_ZXing
     {
         public Code_Scan_Test_by_ZXingPage()
         {
-            //InitializeComponent();
+            InitializeComponent();
         }
 
 

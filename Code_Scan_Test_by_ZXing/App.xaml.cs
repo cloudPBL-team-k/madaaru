@@ -6,8 +6,7 @@ namespace Code_Scan_Test_by_ZXing
     {
         public App()
         {
-            InitializeComponent();
-
+            //InitializeComponent();
 //            MainPage = new Code_Scan_Test_by_ZXingPage();
             MainPage = new NavigationPage(new Code_Scan_Test_by_ZXingPage());
         }
