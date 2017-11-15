@@ -14,6 +14,8 @@ namespace Code_Scan_Test_by_ZXing.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            //global::を付けないといけない?
+          //  ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             global::ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             LoadApplication(new App());
 

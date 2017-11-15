@@ -5,6 +5,8 @@
              Title="Scanner Page">
   <StackLayout Padding="10">
     <Button Text="Scan" Clicked="ScanButtonClicked" />
-    <!--<ListView ItemsSource="{Binding}" VerticalOptions="FillAndExpand"/>-->
+        <!--<ListView ItemsSource="{Binding}" VerticalOptions="FillAndExpand"/>-->
+      <!--Scanした番号を表示-->
+    <Label ClassId="PrintNameLabel" Text="キシリトールガム"></Label>
   </StackLayout>
 </ContentPage>

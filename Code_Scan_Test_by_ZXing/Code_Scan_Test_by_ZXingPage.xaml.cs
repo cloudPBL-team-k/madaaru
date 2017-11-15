@@ -30,6 +30,7 @@ namespace Code_Scan_Test_by_ZXing
                 {
                     await Navigation.PopAsync();
                     await DisplayAlert("Scan Done!", result.Text, "OK");
+                    await this.
                 });
             };
 
