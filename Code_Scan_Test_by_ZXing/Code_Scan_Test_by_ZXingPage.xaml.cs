@@ -1,13 +1,7 @@
 ﻿using System;
-
 using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using Xamarin.Forms.Xaml;
-using Newtonsoft.Json;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Code_Scan_Test_by_ZXing
 {
@@ -41,7 +35,6 @@ namespace Code_Scan_Test_by_ZXing
             };
         }
 
-        //async void ShowJancodeButtonClicked(object sender, EventArgs s)
         void ShowJancodeButtonClicked(object sender, EventArgs s)
         {
                 GetJson gj = new GetJson();
@@ -53,7 +46,6 @@ namespace Code_Scan_Test_by_ZXing
                     await DisplayAlert("Json生データ!新鮮!!", jsonString, "OK");
                 });
         }
-        //async void ShowItemCodeButtonClicked(object sender, EventArgs s)
         void ShowItemNameButtonClicked(object sender, EventArgs s)
         {
             GetJson gj = new GetJson();
@@ -65,13 +57,12 @@ namespace Code_Scan_Test_by_ZXing
                 string itemName2 = thingInfo[0].Jancode;
 
                 await DisplayAlert("商品名!!", thingInfo[0].Name, "OK");
-                //await DisplayAlert("商品名!!", thingInfo.Name, "OK");
                 //それぞれの情報が次の形で呼び出せる
-                //thingInfo.ID
-                //thingInfo.Name
-                //thingInfo.Jancode
-                //thingInfo.CreateDate
-                //thingInfo.UpdateDate
+                //thingInfo[0].ID
+                //thingInfo[0].Name
+                //thingInfo[0].Jancode
+                //thingInfo[0].CreateDate
+                //thingInfo[0].UpdateDate
             });
         }
 
