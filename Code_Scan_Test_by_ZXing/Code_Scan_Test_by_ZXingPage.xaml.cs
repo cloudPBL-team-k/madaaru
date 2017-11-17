@@ -26,44 +26,18 @@ namespace Code_Scan_Test_by_ZXing
                 DefaultOverlayTopText = "バーコードを読み取ります",
                 DefaultOverlayBottomText = "",
             };
-
             await Navigation.PushAsync(scanPage);
 
             scanPage.OnScanResult += (result) =>
             {
                 scanPage.IsScanning = false;
                 string jancode = result.Text;
-                GetJson gj = new GetJson();
-
-
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     scanedcode = result.Text;
                     await Navigation.PopAsync();
                     await DisplayAlert("Scan Done!", result.Text, "OK");
                 });
-
-
-                //Device.BeginInvokeOnMainThread(async () =>
-                //{
-                //    string jsonString = await gj.GetItemJsonString(jancode);
-                //    await Navigation.PopAsync();
-                //    await DisplayAlert("Json生データ!新鮮!!", jsonString, "OK");
-                //});
-
-                //Device.BeginInvokeOnMainThread(async () =>
-                //{
-                //    SearchedInfo thingInfo = await gj.GetItemJson(jancode);
-                //    await Navigation.PopAsync();
-                //    await DisplayAlert("商品名じゃ!!", thingInfo.ThingName, "OK");
-
-                //    //それぞれの情報が次の形で呼び出せる
-                //    //thingInfo.ThingName
-                //    //thingInfo.ThingID
-                //    //thingInfo.Jancode
-                //    //thingInfo.CreateDate
-                //    //thingInfo.UpdateDate
-                //});
             };
         }
 
@@ -83,20 +57,25 @@ namespace Code_Scan_Test_by_ZXing
         void ShowItemNameButtonClicked(object sender, EventArgs s)
         {
             GetJson gj = new GetJson();
-
             Device.BeginInvokeOnMainThread(async () =>
             {
-                SearchedInfo thingInfo = await gj.GetItemJson(scanedcode);
+                List<SearchedInfo> thingInfo = await gj.GetItemInfo(scanedcode);
                 await Navigation.PopAsync();
-                await DisplayAlert("商品名!!", thingInfo.ThingName, "OK");
+                string itemName = thingInfo[0].Name;
+                string itemName2 = thingInfo[0].Jancode;
+
+                await DisplayAlert("商品名!!", thingInfo[0].Name, "OK");
+                //await DisplayAlert("商品名!!", thingInfo.Name, "OK");
                 //それぞれの情報が次の形で呼び出せる
-                //thingInfo.ThingName
-                //thingInfo.ThingID
+                //thingInfo.ID
+                //thingInfo.Name
                 //thingInfo.Jancode
                 //thingInfo.CreateDate
                 //thingInfo.UpdateDate
             });
         }
+
+
 
     }
 

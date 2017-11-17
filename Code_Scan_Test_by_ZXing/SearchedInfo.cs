@@ -1,24 +1,28 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Code_Scan_Test_by_ZXing
 {
+    [JsonArray]
+    public class SearchedInfos{public List<SearchedInfo> JSON;}
+
     //Jsonをシリアライズするときに使うクラス
+    [JsonObject("searchedinfo")]
     public class SearchedInfo
     {
         [JsonProperty("id")]
-        public int ThingID { get; set; }
+        public int Id { get; set; }
         [JsonProperty("name")]
-        public string ThingName { get; set; }
+        public string Name { get; set; }
         [JsonProperty("jancode")]
-        public int Jancode { get; set; }
+        public string Jancode { get; set; }
 
         //CreatedDateはString型で良いのか不明
         [JsonProperty("created_at")]
-        public string CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
         //同じくStringで良いか不明
         [JsonProperty("updated_at")]
-        public string UpdateDate { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }
-
