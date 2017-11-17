@@ -10,6 +10,6 @@
     <Button Text="Show Jancode" Clicked="ShowJancodeButtonClicked" />
     <Button Text="Show Item Name" Clicked="ShowItemNameButtonClicked" />
 
-    <Label ClassId="PrintNameLabel" Text="商品名"></Label>
+    <Label ClassId="PrintNameLabel" Text="ああああここはラベルエリアあああああ"></Label>
   </StackLayout>
 </ContentPage>

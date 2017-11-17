@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDisplayName</key>
-	<string>Code_Scan_Test_by_ZXing</string>
-	<key>CFBundleName</key>
-	<string>Code_Scan_Test_by_ZXing</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.kyutech.klab.and.ksl.Code-Scan-Test-by-ZXing</string>
 	<key>CFBundleShortVersionString</key>
@@ -42,5 +38,7 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleName</key>
+	<string>まだある？</string>
 </dict>
 </plist>
