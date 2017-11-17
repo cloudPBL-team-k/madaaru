@@ -18,6 +18,8 @@ namespace Code_Scan_Test_by_ZXing
             InitializeComponent();
         }
 
+        private string scanedcode = null;
+
         async void ScanButtonClicked(object sender, EventArgs s){
             var scanPage = new ZXingScannerPage()
             {
@@ -36,33 +38,66 @@ namespace Code_Scan_Test_by_ZXing
 
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    scanedcode = result.Text;
                     await Navigation.PopAsync();
                     await DisplayAlert("Scan Done!", result.Text, "OK");
                 });
 
 
+                //Device.BeginInvokeOnMainThread(async () =>
+                //{
+                //    string jsonString = await gj.GetItemJsonString(jancode);
+                //    await Navigation.PopAsync();
+                //    await DisplayAlert("Json生データ!新鮮!!", jsonString, "OK");
+                //});
+
+                //Device.BeginInvokeOnMainThread(async () =>
+                //{
+                //    SearchedInfo thingInfo = await gj.GetItemJson(jancode);
+                //    await Navigation.PopAsync();
+                //    await DisplayAlert("商品名じゃ!!", thingInfo.ThingName, "OK");
+
+                //    //それぞれの情報が次の形で呼び出せる
+                //    //thingInfo.ThingName
+                //    //thingInfo.ThingID
+                //    //thingInfo.Jancode
+                //    //thingInfo.CreateDate
+                //    //thingInfo.UpdateDate
+                //});
+            };
+        }
+
+        //async void ShowJancodeButtonClicked(object sender, EventArgs s)
+        void ShowJancodeButtonClicked(object sender, EventArgs s)
+        {
+                GetJson gj = new GetJson();
+
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    string jsonString = await gj.GetItemJsonString(jancode);
+                    string jsonString = await gj.GetItemJsonString(scanedcode);
                     await Navigation.PopAsync();
                     await DisplayAlert("Json生データ!新鮮!!", jsonString, "OK");
                 });
-
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    SearchedInfo thingInfo = await gj.GetItemJson(jancode);
-                    await Navigation.PopAsync();
-                    await DisplayAlert("商品名じゃ!!", thingInfo.ThingName, "OK");
-
-                    //それぞれの情報が次の形で呼び出せる
-                    //thingInfo.ThingName
-                    //thingInfo.ThingID
-                    //thingInfo.Jancode
-                    //thingInfo.CreateDate
-                    //thingInfo.UpdateDate
-                });
-            };
         }
+        //async void ShowItemCodeButtonClicked(object sender, EventArgs s)
+        void ShowItemNameButtonClicked(object sender, EventArgs s)
+        {
+            GetJson gj = new GetJson();
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                SearchedInfo thingInfo = await gj.GetItemJson(scanedcode);
+                await Navigation.PopAsync();
+                await DisplayAlert("商品名!!", thingInfo.ThingName, "OK");
+                //それぞれの情報が次の形で呼び出せる
+                //thingInfo.ThingName
+                //thingInfo.ThingID
+                //thingInfo.Jancode
+                //thingInfo.CreateDate
+                //thingInfo.UpdateDate
+            });
+        }
+
     }
 
 }

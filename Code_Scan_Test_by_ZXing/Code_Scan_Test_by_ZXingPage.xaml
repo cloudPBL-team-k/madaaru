@@ -7,6 +7,9 @@
     <Button Text="Scan" Clicked="ScanButtonClicked" />
         <!--<ListView ItemsSource="{Binding}" VerticalOptions="FillAndExpand"/>-->
       <!--Scanした番号を表示-->
-    <Label ClassId="PrintNameLabel" Text="キシリトールガム"></Label>
+    <Button Text="Show Jancode" Clicked="ShowJancodeButtonClicked" />
+    <Button Text="Show Item Name" Clicked="ShowItemNameButtonClicked" />
+
+    <Label ClassId="PrintNameLabel" Text="商品名"></Label>
   </StackLayout>
 </ContentPage>
