@@ -44,7 +44,7 @@ namespace Code_Scan_Test_by_ZXing
                 {
                     string jsonString = await gj.GetItemJsonString(scanedcode);
                     await Navigation.PopAsync();
-                    await DisplayAlert("Json生データ!新鮮!!", jsonString, "OK");
+                    await DisplayAlert("Json生データ!", jsonString, "OK");
                 });
         }
 
@@ -53,12 +53,14 @@ namespace Code_Scan_Test_by_ZXing
             GetJson gj = new GetJson();
             Device.BeginInvokeOnMainThread(async () =>
             {
-                List<SearchedInfo> thingInfo = await gj.GetItemInfo(scanedcode);
+                //List<SearchedInfo> thingInfo = await gj.GetItemInfo(scanedcode);
+                SearchedInfo thingInfo = await gj.GetItemInfo(scanedcode);
                 await Navigation.PopAsync();
-                string itemName = thingInfo[0].Name;
-                string itemName2 = thingInfo[0].Jancode;
+                string itemName = thingInfo.Name;
+                string itemName2 = thingInfo.Jancode;
 
-                await DisplayAlert("商品名!!", thingInfo[0].Name, "OK");
+                //await DisplayAlert("商品名!!", thingInfo[0].Name, "OK");
+                await DisplayAlert("商品名!!", thingInfo.Name, "OK");
                 //それぞれの情報が次の形で呼び出せる
                 //thingInfo[0].ID
                 //thingInfo[0].Name
@@ -84,11 +86,13 @@ namespace Code_Scan_Test_by_ZXing
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     GetJson gj = new GetJson();
-                    List<SearchedInfo> thingInfo = await gj.GetItemInfo(result.Text);
+                    //List<SearchedInfo> thingInfo = await gj.GetItemInfo(result.Text);
+                    SearchedInfo thingInfo = await gj.GetItemInfo(result.Text);
 
                     //userIdはとりあえず1の人固定
                     int userId = 1;
-                    int itemId = thingInfo[0].Id;
+                    //int itemId = thingInfo[0].Id;
+                    int itemId = thingInfo.Id;
                     //個数はとりあえず1個固定
                     int itemNum = 1;
 

@@ -10,7 +10,8 @@ namespace Code_Scan_Test_by_ZXing
 {
     public class GetJson
     {
-        public async Task<List<SearchedInfo>> GetItemInfo(string jancode)
+        //public async Task<List<SearchedInfo>> GetItemInfo(string jancode)
+        public async Task<SearchedInfo> GetItemInfo(string jancode)
         {
             string serverUrl = "http://www.samidare.blue:3000";
             string searchAPIUrl = "/things/search";
@@ -29,7 +30,8 @@ namespace Code_Scan_Test_by_ZXing
             //}
 
             string jsonString = await hc.GetStringAsync(reqUrl);
-            List<SearchedInfo> thingInfo = JsonConvert.DeserializeObject<List<SearchedInfo>>(jsonString);
+            //List<SearchedInfo> thingInfo = JsonConvert.DeserializeObject<List<SearchedInfo>>(jsonString);
+            SearchedInfo thingInfo = JsonConvert.DeserializeObject<SearchedInfo>(jsonString);
             return thingInfo;
         
         }
