@@ -85,11 +85,27 @@ namespace Code_Scan_Test_by_ZXing
                 {
                     GetJson gj = new GetJson();
                     List<SearchedInfo> thingInfo = await gj.GetItemInfo(result.Text);
-                    string itemName = thingInfo[0].Name;
 
-                    if(thingInfo[0].Name != "null"){
+                    //userIdはとりあえず1の人固定
+                    int userId = 1;
+                    int itemId = thingInfo[0].Id;
+                    //個数はとりあえず1個固定
+                    int itemNum = 1;
+
+                    Bought_things bt = new Bought_things();
+                    bt.user_id = userId;
+                    bt.thing_id = itemId;
+                    bt.num = itemNum;
+
+                    PostJson pj = new PostJson();
+                    //List<Next_buy_date> nextBuyDate = await pj.PostBoughtThingsInfo(bt);
+                    Next_buy_date nextBuyDate = await pj.PostBoughtThingsInfo(bt);
+
+                    //条件が適切ではない
+                    if(itemId > 0){
                         await Navigation.PopAsync();
-                        await DisplayAlert("Scan Done!", thingInfo[0].Name, "OK");
+                        await DisplayAlert("NEXT BUY DATE!", nextBuyDate.next_buy_date, "OK");
+                        //await DisplayAlert("NEXT BUY DATE!", nextBuyDate[0].next_buy_date, "OK");
                     }else{//null
                         await Navigation.PopAsync();
                         await DisplayAlert("Scan Done!", "商品の名前がありませんでした", "OK");

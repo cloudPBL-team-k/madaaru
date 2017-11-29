@@ -41,6 +41,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchedInfo.cs" />
     <Compile Include="GetJson.cs" />
+    <Compile Include="Bought_things.cs" />
+    <Compile Include="PostJson.cs" />
+    <Compile Include="Next_buy_date.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">
