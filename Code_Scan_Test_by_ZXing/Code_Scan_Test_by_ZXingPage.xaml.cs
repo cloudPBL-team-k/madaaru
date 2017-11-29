@@ -35,6 +35,7 @@ namespace Code_Scan_Test_by_ZXing
             };
         }
 
+        //for debug
         void ShowJancodeButtonClicked(object sender, EventArgs s)
         {
                 GetJson gj = new GetJson();
@@ -46,6 +47,7 @@ namespace Code_Scan_Test_by_ZXing
                     await DisplayAlert("Json生データ!新鮮!!", jsonString, "OK");
                 });
         }
+
         void ShowItemNameButtonClicked(object sender, EventArgs s)
         {
             GetJson gj = new GetJson();
@@ -66,8 +68,41 @@ namespace Code_Scan_Test_by_ZXing
             });
         }
 
+        async void BoughtThisItemBtnClicked(object sender, EventArgs s)
+        {
+            var scanPage = new ZXingScannerPage()
+            {
+                DefaultOverlayTopText = "バーコードを読み取ります",
+                DefaultOverlayBottomText = "",
+            };
+            await Navigation.PushAsync(scanPage);
 
+            scanPage.OnScanResult += (result) =>
+            {
+                scanPage.IsScanning = false;
+
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    GetJson gj = new GetJson();
+                    List<SearchedInfo> thingInfo = await gj.GetItemInfo(result.Text);
+                    string itemName = thingInfo[0].Name;
+
+                    if(thingInfo[0].Name != "null"){
+                        await Navigation.PopAsync();
+                        await DisplayAlert("Scan Done!", thingInfo[0].Name, "OK");
+                    }else{//null
+                        await Navigation.PopAsync();
+                        await DisplayAlert("Scan Done!", "商品の名前がありませんでした", "OK");
+                    }
+
+  
+                });
+            };
+        }
+
+        void ToastBtnClicked(object sender, EventArgs s){
+            DependencyService.Get<IMyFormsToast>().Show("Toast Test!");
+        }
 
     }
-
 }

@@ -26,4 +26,11 @@ namespace Code_Scan_Test_by_ZXing
             // Handle when your app resumes
         }
     }
+
+    //「依存処理」のインターフェース定義
+    //インターフェイスの定義はIから始まる習慣があるっぽい
+    public interface IMyFormsToast
+    {
+        void Show(string message);
+    }
 }
