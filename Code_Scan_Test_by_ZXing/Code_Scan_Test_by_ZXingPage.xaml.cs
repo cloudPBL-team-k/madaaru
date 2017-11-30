@@ -85,6 +85,51 @@ namespace Code_Scan_Test_by_ZXing
                     string jsonString = await gj.GetItemJsonString(scanedcode);
                     if (jsonString != "null")
                     {
+                        //userIdはとりあえず1の人固定
+                        int userId = 1;
+                        //int itemId = thingInfo[0].Id;
+                        int itemId = thingInfo.Id;
+                        //個数はとりあえず1個固定
+                        int itemNum = 1;
+
+                        Bought_thing bt = new Bought_thing();
+                        bt.user_id = userId;
+                        bt.thing_id = itemId;
+                        bt.num = itemNum;
+
+                        PostJson pj = new PostJson();
+                        //List<Next_buy_date> nextBuyDate = await pj.PostBoughtThingsInfo(bt);
+                        Next_buy_date nextBuyDate = await pj.PostBoughtThingsInfo(bt);
+                        await Navigation.PopAsync();
+                        await DisplayAlert("次の購入日", nextBuyDate.next_buy_date, "OK");
+                    }
+                    else
+                    {//json null
+                        DependencyService.Get<IMyFormsToast>().Show("該当の商品情報がありません!");
+                    }
+                });
+            };
+        }
+
+        async void ShowAllItemBtnClicked(object sender, EventArgs s)
+        {
+            var scanPage = new ZXingScannerPage()
+            {
+                DefaultOverlayTopText = "バーコードを読み取ります",
+                DefaultOverlayBottomText = "",
+            };
+            await Navigation.PushAsync(scanPage);
+
+            scanPage.OnScanResult += (result) =>
+            {
+                scanPage.IsScanning = false;
+
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    GetJson gj = new GetJson();
+                    string jsonString = await gj.GetItemJsonString(scanedcode);
+                    if (jsonString != "null")
+                    {
                         //List<SearchedInfo> thingInfo = await gj.GetItemInfo(result.Text);
                         SearchedInfo thingInfo = await gj.GetItemInfo(result.Text);
                         await Navigation.PopAsync();
@@ -104,15 +149,18 @@ namespace Code_Scan_Test_by_ZXing
                         PostJson pj = new PostJson();
                         //List<Next_buy_date> nextBuyDate = await pj.PostBoughtThingsInfo(bt);
                         Next_buy_date nextBuyDate = await pj.PostBoughtThingsInfo(bt);
+                        await Navigation.PopAsync();
+                    }
                     }
                     else
                     {//json null
-                        DependencyService.Get<IMyFormsToast>().Show("該当の商品情報がありません!");
+                        DependencyService.Get<IMyFormsToast>().Show("登録された商品はありません!");
                     }
                 });
             };
         }
 
+      
         void ToastBtnClicked(object sender, EventArgs s){
             DependencyService.Get<IMyFormsToast>().Show("Toast Test!");
         }
