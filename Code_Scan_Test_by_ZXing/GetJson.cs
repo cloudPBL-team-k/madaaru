@@ -36,7 +36,7 @@ namespace Code_Scan_Test_by_ZXing
         
         }
 
-        //jsonの生データを表示するデバッグ用
+        //jsonを返す
         public async Task<string> GetItemJsonString(string jancode)
         {
             string serverUrl = "http://www.samidare.blue:3000";

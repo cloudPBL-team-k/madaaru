@@ -14,7 +14,7 @@ namespace Code_Scan_Test_by_ZXing
         //買う商品の情報オブジェクトBought_thingsを受け取ってJson化してPost後、
         //サーバーから帰ってくる[次にこの商品を買うべき日付]をオブジェクト化して変えす
         //public async Task<List<Next_buy_date>> PostBoughtThingsInfo(Bought_things bt)
-        public async Task<Next_buy_date> PostBoughtThingsInfo(Bought_things bt)
+        public async Task<Next_buy_date> PostBoughtThingsInfo(Bought_thing bt)
         {
             string serverUrl = "http://www.samidare.blue:3000";
             string APIUrl = "/bought_things";
