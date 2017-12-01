@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
 using System.Collections.Generic;
+using ZXing;
+using System.Threading.Tasks;
 
 namespace Code_Scan_Test_by_ZXing
 {
@@ -12,7 +14,7 @@ namespace Code_Scan_Test_by_ZXing
             InitializeComponent();
         }
 
-        private string scanedcode = null;
+        private string scanedcode;
 
         async void ScanButtonClicked(object sender, EventArgs s){
             var scanPage = new ZXingScannerPage()
@@ -39,7 +41,6 @@ namespace Code_Scan_Test_by_ZXing
         void ShowJancodeButtonClicked(object sender, EventArgs s)
         {
                 GetJson gj = new GetJson();
-
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     string jsonString = await gj.GetItemJsonString(scanedcode);
@@ -82,12 +83,11 @@ namespace Code_Scan_Test_by_ZXing
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     GetJson gj = new GetJson();
-                    string jsonString = await gj.GetItemJsonString(scanedcode);
+                    string jsonString = await gj.GetItemJsonString(result.Text);
                     if (jsonString != "null")
                     {
                         //List<SearchedInfo> thingInfo = await gj.GetItemInfo(result.Text);
                         SearchedInfo thingInfo = await gj.GetItemInfo(result.Text);
-
                         //userIdはとりあえず1の人固定
                         int userId = 1;
                         //int itemId = thingInfo[0].Id;
@@ -95,14 +95,26 @@ namespace Code_Scan_Test_by_ZXing
                         //個数はとりあえず1個固定
                         int itemNum = 1;
 
+                        //購入品情報を作成
                         Bought_thing bt = new Bought_thing();
                         bt.user_id = userId;
                         bt.thing_id = itemId;
                         bt.num = itemNum;
 
                         PostJson pj = new PostJson();
-                        //List<Next_buy_date> nextBuyDate = await pj.PostBoughtThingsInfo(bt);
-                        Next_buy_date nextBuyDate = await pj.PostBoughtThingsInfo(bt);
+                        //Postして購入済みリストに追加、次の購入日を取得
+                        Next_buy_date nextBuyDate = await pj.PostBoughtThingInfo(bt);
+
+                        await Task.Delay(100);
+                        //消耗品リスト作成
+                        Bought_expendable be = new Bought_expendable();
+                        be.user_id = userId;
+                        be.thing_id = thingInfo.Id;
+                        be.limit = nextBuyDate.next_buy_date;
+                        //Postして消耗品リストに登録
+                        Expendables postedEx = await pj.PostExpendablesInfo(be);
+
+                        //表示
                         await Navigation.PopAsync();
                         await DisplayAlert("次の購入日", nextBuyDate.next_buy_date, "OK");
                     }
@@ -113,7 +125,6 @@ namespace Code_Scan_Test_by_ZXing
                 });
             };
         }
-
         void ToastBtnClicked(object sender, EventArgs s){
             DependencyService.Get<IMyFormsToast>().Show("Toast Test!");
         }

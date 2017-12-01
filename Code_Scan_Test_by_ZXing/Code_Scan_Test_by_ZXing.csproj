@@ -46,6 +46,7 @@
     <Compile Include="Next_buy_date.cs" />
     <Compile Include="Bought_things.cs" />
     <Compile Include="Expendables.cs" />
+    <Compile Include="Bought_expendable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">

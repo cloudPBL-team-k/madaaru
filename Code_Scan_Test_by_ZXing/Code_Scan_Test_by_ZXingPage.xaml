@@ -11,7 +11,7 @@
     <Button Text="Show Item Name" Clicked="ShowItemNameButtonClicked" />
     <Button Text="I bought This Item" Clicked="BoughtThisItemBtnClicked" />
     <Button Text="Toast" Clicked="ToastBtnClicked" />
-
     <Label ClassId="PrintNameLabel" Text="ああああここはラベルエリアあああああ"></Label>
-  </StackLayout>
+            
+    </StackLayout>
 </ContentPage>
