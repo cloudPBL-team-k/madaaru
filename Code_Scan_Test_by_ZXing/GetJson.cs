@@ -36,7 +36,41 @@ namespace Code_Scan_Test_by_ZXing
         
         }
 
-        //jsonを返す
+        public async Task<List<Bought_things>> GetAllItemsInfo(int user_id)
+        //public async Task<Bought_things> GetAllItemsInfo(int user_id)
+        {
+            string serverUrl = "http://www.samidare.blue:3000";
+            string searchAPIUrl = "/bought_things";
+            string reqUrl = $"{serverUrl}{searchAPIUrl}?user_id={user_id}";
+            //string finalUrl = "http://www.samidare.blue:3000/bought_things?user_id=1";
+
+            HttpClient hc = new HttpClient();
+
+            string jsonString = await hc.GetStringAsync(reqUrl);
+            List<Bought_things> thingsInfo = JsonConvert.DeserializeObject<List<Bought_things>>(jsonString);
+            //Bought_things thingsInfo = JsonConvert.DeserializeObject<Bought_things>(jsonString);
+            return thingsInfo;
+
+        }
+
+        public async Task<List<Expendables>> expendablesInfo(int user_id)
+        //public async Task<Expendables> GetExpendablesInfo(int user_id)
+        {
+            string serverUrl = "http://www.samidare.blue:3000";
+            string searchAPIUrl = "/expendables.json";
+            string reqUrl = $"{serverUrl}{searchAPIUrl}?user_id={user_id}";
+            //string finalUrl = "http://www.samidare.blue:3000/expendables.json?user_id=1";
+
+            HttpClient hc = new HttpClient();
+
+            string jsonString = await hc.GetStringAsync(reqUrl);
+            List<Expendables> expendablesInfo = JsonConvert.DeserializeObject<List<Expendables>>(jsonString);
+            //Expendables expendablesInfo = JsonConvert.DeserializeObject<Expendables>(jsonString);
+            return expendablesInfo;
+
+        }
+
+        //jsonの生データを表示するデバッグ用
         public async Task<string> GetItemJsonString(string jancode)
         {
             string serverUrl = "http://www.samidare.blue:3000";

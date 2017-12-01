@@ -85,6 +85,7 @@ namespace Code_Scan_Test_by_ZXing
                     string jsonString = await gj.GetItemJsonString(scanedcode);
                     if (jsonString != "null")
                     {
+                        SearchedInfo thingInfo = await gj.GetItemInfo(result.Text);
                         //userIdはとりあえず1の人固定
                         int userId = 1;
                         //int itemId = thingInfo[0].Id;
@@ -111,7 +112,7 @@ namespace Code_Scan_Test_by_ZXing
             };
         }
 
-        async void ShowAllItemBtnClicked(object sender, EventArgs s)
+        async void ShowAllItemsBtnClicked(object sender, EventArgs s)
         {
             var scanPage = new ZXingScannerPage()
             {
@@ -130,27 +131,24 @@ namespace Code_Scan_Test_by_ZXing
                     string jsonString = await gj.GetItemJsonString(scanedcode);
                     if (jsonString != "null")
                     {
-                        //List<SearchedInfo> thingInfo = await gj.GetItemInfo(result.Text);
-                        SearchedInfo thingInfo = await gj.GetItemInfo(result.Text);
-                        await Navigation.PopAsync();
-                        await DisplayAlert("商品名!!", thingInfo.Name, "OK");
-                        //userIdはとりあえず1の人固定
-                        int userId = 1;
-                        //int itemId = thingInfo[0].Id;
-                        int itemId = thingInfo.Id;
-                        //個数はとりあえず1個固定
-                        int itemNum = 1;
+                        List<Bought_things> thingsInfo = await gj.GetAllItemsInfo(result.Text);
 
-                        Bought_thing bt = new Bought_thing();
-                        bt.user_id = userId;
-                        bt.thing_id = itemId;
-                        bt.num = itemNum;
+                        List<Expendables> expendablesInfo = await gj.GetExpendablesInfo(result.Text);
 
-                        PostJson pj = new PostJson();
-                        //List<Next_buy_date> nextBuyDate = await pj.PostBoughtThingsInfo(bt);
-                        Next_buy_date nextBuyDate = await pj.PostBoughtThingsInfo(bt);
+                        int size = things.Count;
+                         list = new List<string, string>();
+
+
+                        for(int i =0; i < expendablesInfo.Count; i++){
+                            list.Insert(0,  "商品名:"+expendablesInfo[i].thing.Name, "次回購入予定日:"expendableInfo[i].thing.Limit);
+                        }
+
+                        //for(thingsInfo.Count == 1; things.Count == size; things.Count++){
+                        //    list.Insert(0, "商品名:"+expendables.thing.Name, "次回購入予定日:"+expendable.thing.Limit);
+                        //}
+                      
                         await Navigation.PopAsync();
-                    }
+                        await DisplayAlert("登録一覧", list.ToString(), "OK");
                     }
                     else
                     {//json null
@@ -160,7 +158,7 @@ namespace Code_Scan_Test_by_ZXing
             };
         }
 
-      
+
         void ToastBtnClicked(object sender, EventArgs s){
             DependencyService.Get<IMyFormsToast>().Show("Toast Test!");
         }
