@@ -50,5 +50,19 @@ namespace Code_Scan_Test_by_ZXing
 
             return jsonString;
         }
+
+
+        public async Task<Expendables> GetExpendablesObject(int user_id){
+            string serverUrl = "http://www.samidare.blue:3000";
+            string searchAPIUrl = "/expendables.json";
+            string reqUrl = $"{serverUrl}{searchAPIUrl}?=user_id={user_id}";
+            //string finalUrl = "http://www.samidare.blue:3000/expendables.json";
+
+            HttpClient hc = new HttpClient();
+            string jsonString = await hc.GetStringAsync(reqUrl);
+            //List<SearchedInfo> thingInfo = JsonConvert.DeserializeObject<List<SearchedInfo>>(jsonString);
+            Expendables expendables = JsonConvert.DeserializeObject<Expendables>(jsonString);
+            return expendables;
+        }
     }
 }

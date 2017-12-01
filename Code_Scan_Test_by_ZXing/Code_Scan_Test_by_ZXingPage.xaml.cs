@@ -62,7 +62,7 @@ namespace Code_Scan_Test_by_ZXing
                 }else{//json null
                     DependencyService.Get<IMyFormsToast>().Show("該当の商品情報がありません!");
                 }
-
+               
             });
         }
 
@@ -87,8 +87,7 @@ namespace Code_Scan_Test_by_ZXing
                     {
                         //List<SearchedInfo> thingInfo = await gj.GetItemInfo(result.Text);
                         SearchedInfo thingInfo = await gj.GetItemInfo(result.Text);
-                        await Navigation.PopAsync();
-                        await DisplayAlert("商品名!!", thingInfo.Name, "OK");
+
                         //userIdはとりあえず1の人固定
                         int userId = 1;
                         //int itemId = thingInfo[0].Id;
@@ -104,6 +103,8 @@ namespace Code_Scan_Test_by_ZXing
                         PostJson pj = new PostJson();
                         //List<Next_buy_date> nextBuyDate = await pj.PostBoughtThingsInfo(bt);
                         Next_buy_date nextBuyDate = await pj.PostBoughtThingsInfo(bt);
+                        await Navigation.PopAsync();
+                        await DisplayAlert("次の購入日", nextBuyDate.next_buy_date, "OK");
                     }
                     else
                     {//json null

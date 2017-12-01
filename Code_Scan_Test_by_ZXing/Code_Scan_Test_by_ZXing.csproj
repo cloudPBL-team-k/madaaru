@@ -45,6 +45,7 @@
     <Compile Include="PostJson.cs" />
     <Compile Include="Next_buy_date.cs" />
     <Compile Include="Bought_things.cs" />
+    <Compile Include="Expendables.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">
