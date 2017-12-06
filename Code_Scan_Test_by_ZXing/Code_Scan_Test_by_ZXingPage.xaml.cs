@@ -86,8 +86,7 @@ namespace Code_Scan_Test_by_ZXing
                     string jsonString = await gj.GetItemJsonString(result.Text);
                     if (jsonString != "null")
                     {
-                        //List<SearchedInfo> thingInfo = await gj.GetItemInfo(result.Text);
-                        SearchedInfo thingInfo = await gj.GetItemInfo(result.Text);
+                        SearchedInfo thingInfo = gj.GetItemObjectFromJson(result.Text);
                         //userIdはとりあえず1の人固定
                         int userId = 1;
                         //int itemId = thingInfo[0].Id;
@@ -125,6 +124,54 @@ namespace Code_Scan_Test_by_ZXing
                 });
             };
         }
+
+        async void ShowAllItemsBtnClicked(object sender, EventArgs s)
+        {
+            //var scanPage = new ZXingScannerPage()
+            //{
+            //    DefaultOverlayTopText = "バーコードを読み取ります",
+            //    DefaultOverlayBottomText = "",
+            //};
+            //await Navigation.PushAsync(scanPage);
+
+            //scanPage.OnScanResult += (result) =>
+            //{
+            //    scanPage.IsScanning = false;
+
+            //    Device.BeginInvokeOnMainThread(async () =>
+            //    {
+            //        GetJson gj = new GetJson();
+            //        string jsonString = await gj.GetItemJsonString(scanedcode);
+            //        if (jsonString != "null")
+            //        {
+            //            List<Bought_things> thingsInfo = await gj.GetAllItemsInfo(result.Text);
+
+            //            List<Expendables> expendablesInfo = await gj.GetExpendablesInfo(result.Text);
+
+            //            int size = things.Count;
+            //             list = new List<string, string>();
+
+
+            //            for(int i =0; i < expendablesInfo.Count; i++){
+            //                list.Insert(0,  "商品名:"+expendablesInfo[i].thing.Name, "次回購入予定日:"expendableInfo[i].thing.Limit);
+            //            }
+
+            //            for(thingsInfo.Count == 1; things.Count == size; things.Count++){
+            //                list.Insert(0, "商品名:"+expendables.thing.Name, "次回購入予定日:"+expendable.thing.Limit);
+            //            }
+                      
+            //            await Navigation.PopAsync();
+            //            await DisplayAlert("登録一覧", list.ToString(), "OK");
+            //        }
+            //        else
+            //        {//json null
+            //            DependencyService.Get<IMyFormsToast>().Show("登録された商品はありません!");
+            //        }
+            //    });
+            //};
+        }
+
+
         void ToastBtnClicked(object sender, EventArgs s){
             DependencyService.Get<IMyFormsToast>().Show("Toast Test!");
         }
