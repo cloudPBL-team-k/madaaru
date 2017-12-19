@@ -3,5 +3,6 @@
 	<uses-sdk android:minSdkVersion="19" />
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.FLASHLIGHT" />
+	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="Code_Scan_Test_by_ZXing"></application>
 </manifest>

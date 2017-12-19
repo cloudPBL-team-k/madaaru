@@ -25,7 +25,7 @@ namespace Code_Scan_Test_by_ZXing {
                     GetJson gj = new GetJson();
                     string jsonString = await gj.GetItemJsonString(result.Text);
                     if (jsonString != "null") {
-                        SearchedInfo thingInfo = gj.GetItemObjectFromJson(result.Text);
+                        SearchedInfo thingInfo = gj.GetItemObjectFromJson(jsonString);
                         //userIdはとりあえず1の人固定
                         int userId = 1;
                         //int itemId = thingInfo[0].Id;
@@ -43,6 +43,8 @@ namespace Code_Scan_Test_by_ZXing {
                         //Postして購入済みリストに追加、次の購入日を取得
                         Next_buy_date nextBuyDate = await pj.PostBoughtThingInfo(bt);
 
+                        DependencyService.Get<IMyFormsToast>().Show("次の購入日を取得:"+ nextBuyDate.next_buy_date);
+
                         //消耗品リスト作成
                         Bought_expendable be = new Bought_expendable();
                         be.user_id = userId;
@@ -51,19 +53,23 @@ namespace Code_Scan_Test_by_ZXing {
                         //Postして消耗品リストに登録
                         Expendables postedEx = await pj.PostExpendablesInfo(be);
 
+                        DependencyService.Get<IMyFormsToast>().Show("消耗品リストに登録しました");
+
                         //表示
-                        await Navigation.PopAsync();
-                        await DisplayAlert("次の購入日", nextBuyDate.next_buy_date, "OK");
+                        //await Navigation.PopAsync();
+                        //await DisplayAlert("次の購入日", nextBuyDate.next_buy_date, "OK");
                     } else {//json null
                         DependencyService.Get<IMyFormsToast>().Show("該当の商品情報がありません!");
                     }
                 });
+
             };
         }
 
+
+
         void ShowAllItemsBtnClicked(object sender, EventArgs s) {
             DependencyService.Get<IMyFormsToast>().Show("テストトースト");
-            //DependencyService.Get<IMyFormsToast>().Show("登録された商品はありません!");
         }
 
         void DevPageBtnClicked(object sender, EventArgs s){
