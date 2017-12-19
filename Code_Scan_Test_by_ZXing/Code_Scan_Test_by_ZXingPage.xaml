@@ -4,15 +4,10 @@
              x:Class="Code_Scan_Test_by_ZXing.Code_Scan_Test_by_ZXingPage"
              Title="Scanner Page">
   <StackLayout Padding="10">
-    <Button Text="Scan" Clicked="ScanButtonClicked" />
-        <!--<ListView ItemsSource="{Binding}" VerticalOptions="FillAndExpand"/>-->
-      <!--Scanした番号を表示-->
-    <Button Text="Show Jancode" Clicked="ShowJancodeButtonClicked" />
-    <Button Text="Show Item Name" Clicked="ShowItemNameButtonClicked" />
+
     <Button Text="I bought This Item" Clicked="BoughtThisItemBtnClicked" />
-    <Button Text="Show All Items" Clicked="ShowAllItemsBtnClisked" />
-    <Button Text="Toast" Clicked="ToastBtnClicked" />
-    <Label ClassId="PrintNameLabel" Text="ああああここはラベルエリアあああああ"></Label>
-            
+    <Button Text="Show All Items" Clicked="ShowAllItemsBtnClicked" />
+    <Button Text="Dev Page" Clicked="DevPageBtnClicked" BackgroundColor="Orange"/>
+                
     </StackLayout>
 </ContentPage>

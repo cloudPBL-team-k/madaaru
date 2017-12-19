@@ -30,6 +30,10 @@
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
     <EmbeddedResource Include="Code_Scan_Test_by_ZXingPage.xaml" />
+    <EmbeddedResource Include="DevPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -47,6 +51,10 @@
     <Compile Include="Bought_things.cs" />
     <Compile Include="Expendables.cs" />
     <Compile Include="Bought_expendable.cs" />
+    <Compile Include="DevPage.xaml.cs">
+      <DependentUpon>DevPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ServerInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">
