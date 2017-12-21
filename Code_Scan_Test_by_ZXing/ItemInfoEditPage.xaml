@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Code_Scan_Test_by_ZXing.ItemInfoEditPage">
+   <StackLayout>
+        <Label Text= "UserIdをここに表示"/>
+        <Label Text= "ItemIdをここに表示"/>
+        <Label Text= "Jancodeをここに表示"/>
+        <Label Text= "商品名をここに表示"/>
+
+        <Entry Text = "1" x:Name="itemNumInput"/>
+        <Button Text="この内容を登録" Clicked="OkBtnClicked" BackgroundColor="Orange" />
+        <Button Text="Cancel" Clicked="CancelBtnClicked" BackgroundColor="Red" />            
+    </StackLayout>
+</ContentPage>
