@@ -70,7 +70,8 @@ namespace Code_Scan_Test_by_ZXing {
 
 
         void ShowAllItemsBtnClicked(object sender, EventArgs s) {
-            DependencyService.Get<IMyFormsToast>().Show("テストトースト");
+           // DependencyService.Get<IMyFormsToast>().Show("テストトースト");
+            Navigation.PushAsync(new SABpage(), true);
         }
 
         void DevPageBtnClicked(object sender, EventArgs s){

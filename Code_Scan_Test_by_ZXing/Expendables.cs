@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Code_Scan_Test_by_ZXing
 {
@@ -19,5 +20,7 @@ namespace Code_Scan_Test_by_ZXing
         public DateTime created_at { get; set; }
         [JsonProperty("updated_at")]
         public DateTime updated_at { get; set; }
+        [JsonProperty("name")]
+        public string name { get; set; }
     }
 }

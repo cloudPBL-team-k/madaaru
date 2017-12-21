@@ -187,7 +187,7 @@ namespace Code_Scan_Test_by_ZXing {
 
                 });
             };
-            Navigation.PushAsync(new LoginPage(), true);
+            //Navigation.PushAsync(new LoginPage(), true);
         }
 
         void LoginBtnClicked(object sender, EventArgs s){

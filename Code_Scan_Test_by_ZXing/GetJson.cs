@@ -31,19 +31,25 @@ namespace Code_Scan_Test_by_ZXing {
             return thingInfo;
         }
 
-        public async Task<List<Bought_things>> GetAllItemsInfo(int user_id)
+        public List<Expendables> GetAllItemsObjectFromJson(string jsonString)
         {
-            string serverUrl = ServerInfo.url;
-            string searchAPIUrl = "/bought_things";
-            string reqUrl = $"{serverUrl}{searchAPIUrl}?user_id={user_id}";
-
-            HttpClient hc = new HttpClient();
-            string jsonString = await hc.GetStringAsync(reqUrl);
-            List<Bought_things> thingsInfo = JsonConvert.DeserializeObject<List<Bought_things>>(jsonString);
-            return thingsInfo;
+            List<Expendables> expendablesInfo = JsonConvert.DeserializeObject<List<Expendables>>(jsonString);
+            return expendablesInfo;
         }
 
-        public async Task<List<Expendables>> GetExpendablesInfo(int user_id)
+        //public async Task<List<Bought_things>> GetAllItemsInfo(int user_id)
+        //{
+        //    string serverUrl = ServerInfo.url;
+        //    string searchAPIUrl = "/bought_things";
+        //    string reqUrl = $"{serverUrl}{searchAPIUrl}?user_id={user_id}";
+
+        //    HttpClient hc = new HttpClient();
+        //    string jsonString = await hc.GetStringAsync(reqUrl);
+        //    List<Bought_things> thingsInfo = JsonConvert.DeserializeObject<List<Bought_things>>(jsonString);
+        //    return thingsInfo;
+        //}
+
+        public async Task<string> GetExpendablesInfo(int user_id)
         {
             string serverUrl = ServerInfo.url;
             string searchAPIUrl = "/expendables.json";
@@ -52,9 +58,7 @@ namespace Code_Scan_Test_by_ZXing {
             HttpClient hc = new HttpClient();
 
             string jsonString = await hc.GetStringAsync(reqUrl);
-            List<Expendables> expendablesInfo = JsonConvert.DeserializeObject<List<Expendables>>(jsonString);
-            return expendablesInfo;
-
+            return jsonString;
         }
 
         //jsonの生データを表示するデバッグ用
