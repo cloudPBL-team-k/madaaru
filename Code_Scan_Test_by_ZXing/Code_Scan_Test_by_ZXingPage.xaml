@@ -8,6 +8,7 @@
     <Button Text="I bought This Item" Clicked="BoughtThisItemBtnClicked" />
     <Button Text="Show All Items" Clicked="ShowAllItemsBtnClicked" />
     <Button Text="Dev Page" Clicked="DevPageBtnClicked" BackgroundColor="Orange"/>
-                
+    <Button Text="Log Out" Clicked="LogOutBtnClicked" BackgroundColor="Aqua"/>
+
     </StackLayout>
 </ContentPage>

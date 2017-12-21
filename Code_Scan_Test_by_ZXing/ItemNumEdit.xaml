@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Code_Scan_Test_by_ZXing.ItemNumEdit">
+    <StackLayout>
+        <Entry Text = "この商品を購入した個数を入力してください"/>
+        <Entry Text = "1" x:Name="itemNumInput"/>
+        <Button Text="OK" Clicked="OKBtnClicked" />            
+    </StackLayout>
+</ContentPage>

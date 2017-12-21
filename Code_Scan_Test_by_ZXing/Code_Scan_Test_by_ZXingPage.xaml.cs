@@ -34,7 +34,6 @@ namespace Code_Scan_Test_by_ZXing {
                         SearchedInfo thingInfo = gj.GetItemObjectFromJson(jsonString);
                         //userIdはとりあえず1の人固定
                         int userId = 1;
-                        //int itemId = thingInfo[0].Id;
                         int itemId = thingInfo.Id;
                         //個数はとりあえず1個固定
                         int itemNum = 1;
@@ -76,6 +75,12 @@ namespace Code_Scan_Test_by_ZXing {
 
         void DevPageBtnClicked(object sender, EventArgs s){
             Navigation.PushAsync(new DevPage(), true);
+        }
+
+        async void LogOutBtnClicked(object sender, EventArgs s) {
+            App.IsUserLoggedIn = false;
+            Navigation.InsertPageBefore(new LoginPage(), this);
+            await Navigation.PopAsync();
         }
     }
 }
