@@ -43,6 +43,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="SABpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="ItemNumEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -76,6 +79,7 @@
     </Compile>
     <Compile Include="SABpage.xaml.cs">
       <DependentUpon>SABpage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="ItemNumEdit.xaml.cs">
       <DependentUpon>ItemNumEdit.xaml</DependentUpon>
