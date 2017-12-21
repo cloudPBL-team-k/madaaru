@@ -4,7 +4,7 @@
     </ContentPage.Content>-->
 
     <StackLayout Padding="10">
-    <Button Text="Show All Items" Clicked="ShowAllItemsBtnClicked"/>
+    <Button Text="Show All Items" Clicked="ShowAllItemsButtonClicked"/>
     <Button Text="Back" Clicked="BackBtnClicked"/>   
    
   
