@@ -69,6 +69,7 @@
     <Compile Include="ItemInfoEditPage.xaml.cs">
       <DependentUpon>ItemInfoEditPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">

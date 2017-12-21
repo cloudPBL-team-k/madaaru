@@ -1,12 +1,25 @@
 ﻿using Xamarin.Forms;
+using System.Threading;
 
 namespace Code_Scan_Test_by_ZXing {
     public partial class App : Application {
+
+        public static bool IsUserLoggedIn { get; set; }
+
+
         public App() {
             //InitializeComponent();
             //MainPage = new Code_Scan_Test_by_ZXingPage();
             //画面遷移履歴の管理、戻るボタン対処をNavigationPageクラスが自動的に行う
-            MainPage = new NavigationPage(new Code_Scan_Test_by_ZXingPage());
+
+            if(!IsUserLoggedIn){
+                //Loginページへ
+                MainPage = new NavigationPage(new LoginPage());
+            }else{
+                MainPage = new NavigationPage(new Code_Scan_Test_by_ZXingPage());
+            }
+        
+        
         }
 
         protected override void OnStart() {

@@ -76,5 +76,11 @@ namespace Code_Scan_Test_by_ZXing {
         void DevPageBtnClicked(object sender, EventArgs s){
             Navigation.PushAsync(new DevPage(), true);
         }
+
+        async void LogOutBtnClicked(object sender, EventArgs s) {
+            App.IsUserLoggedIn = false;
+            Navigation.InsertPageBefore(new LoginPage(), this);
+            await Navigation.PopAsync();
+        }
     }
 }
