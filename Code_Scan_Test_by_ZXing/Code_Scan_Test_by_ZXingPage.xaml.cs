@@ -6,7 +6,7 @@ using ZXing;
 using System.Threading.Tasks;
 
 namespace Code_Scan_Test_by_ZXing {
-    public partial class Code_Scan_Test_by_ZXingPage : ContentPage {
+    public partial class Code_Scan_Test_by_ZXingPage : CarouselPage {
         public Code_Scan_Test_by_ZXingPage() {
             InitializeComponent();
         }

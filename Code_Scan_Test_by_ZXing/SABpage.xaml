@@ -3,7 +3,7 @@
 <!--    <ContentPage.Content>
     </ContentPage.Content>-->
 
-    <StackLayout Padding="10">
+    <StackLayout Padding="10" BackgroundColor="beige">
     <Button Text="Show All Items" Clicked="ShowAllItemsButtonClicked"/>
     <Button Text="Back" Clicked="BackBtnClicked"/>   
    

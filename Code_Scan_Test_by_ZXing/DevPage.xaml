@@ -3,7 +3,7 @@
 <!--	<ContentPage.Content>
 	</ContentPage.Content>-->
 
-    <StackLayout Padding="10">
+    <StackLayout Padding="10" BackgroundColor="beige">
     <Button Text="Login Page" Clicked="LoginBtnClicked" BackgroundColor="Red" />
     <Button Text="Scan" Clicked="ScanButtonClicked" />
         <!--<ListView ItemsSource="{Binding}" VerticalOptions="FillAndExpand"/>-->

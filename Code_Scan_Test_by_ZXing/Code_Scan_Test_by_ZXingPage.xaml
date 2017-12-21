@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Code_Scan_Test_by_ZXing"
              x:Class="Code_Scan_Test_by_ZXing.Code_Scan_Test_by_ZXingPage"
              Title="Scanner Page">
-  <StackLayout Padding="10">
+
+    <ContentPage>
+    <StackLayout Padding="10" BackgroundColor="beige">
 
     <Button Text="I bought This Item" Clicked="BoughtThisItemBtnClicked" />
     <Button Text="Show All Items" Clicked="ShowAllItemsBtnClicked" />
     <Button Text="Dev Page" Clicked="DevPageBtnClicked" BackgroundColor="Orange"/>
     <Button Text="Log Out" Clicked="LogOutBtnClicked" BackgroundColor="Aqua"/>
-
+   
     </StackLayout>
-</ContentPage>
+    </ContentPage> 
+
+    <local:SABpage/>
+    <local:DevPage/>  
+
+</CarouselPage>
