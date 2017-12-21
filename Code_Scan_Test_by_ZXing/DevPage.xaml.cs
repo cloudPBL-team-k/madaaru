@@ -12,7 +12,7 @@ namespace Code_Scan_Test_by_ZXing {
         }
 
 
-        private string scanedcode;
+        private string scanedcode = "0";
 
         async void ScanButtonClicked(object sender, EventArgs s) {
             var scanPage = new ZXingScannerPage() {
@@ -33,35 +33,51 @@ namespace Code_Scan_Test_by_ZXing {
         }
 
         //for debug
-        void ShowJancodeButtonClicked(object sender, EventArgs s) {
+        async void ShowJancodeButtonClicked(object sender, EventArgs s) {
             GetJson gj = new GetJson();
-            Device.BeginInvokeOnMainThread(async () => {
+            if(scanedcode != "0"){
                 string jsonString = await gj.GetItemJsonString(scanedcode);
-                await Navigation.PopAsync();
-                await DisplayAlert("Json生データ!", jsonString, "OK");
-            });
+                DependencyService.Get<IMyFormsToast>().Show(jsonString);
+            }else{//Not Scaned
+                DependencyService.Get<IMyFormsToast>().Show("Jancodeがスキャンされていません");
+            }
         }
 
-        void ShowItemNameButtonClicked(object sender, EventArgs s) {
+        async void ShowItemNameButtonClicked(object sender, EventArgs s) {
             GetJson gj = new GetJson();
-            Device.BeginInvokeOnMainThread(async () => {
-                string jsonString = await gj.GetItemJsonString(scanedcode);
-                if (jsonString != "null") {
-                    //List<SearchedInfo> thingInfo = await gj.GetItemInfo(scanedcode);
-                    SearchedInfo thingInfo = await gj.GetItemInfo(scanedcode);
-                    await Navigation.PopAsync();
-                    await DisplayAlert("商品名!!", thingInfo.Name, "OK");
-                } else {//json null
-                    DependencyService.Get<IMyFormsToast>().Show("該当の商品情報がありません!");
-                }
 
-            });
+            string jsonString = await gj.GetItemJsonString(scanedcode);
+            if (jsonString != "null") {
+                SearchedInfo thingInfo = await gj.GetItemInfo(scanedcode);
+                DependencyService.Get<IMyFormsToast>().Show("商品名!!" + thingInfo.Name);
+            } else {//json null
+                DependencyService.Get<IMyFormsToast>().Show("該当の商品情報がありません!");
+            }
         }
 
 
         void ToastDevBtnClicked(object sender, EventArgs s) {
             DependencyService.Get<IMyFormsToast>().Show("Toast Dev Page Test!");
         }
+
+
+        //async void ScanButtonClicked(object sender, EventArgs s) {
+        //    var scanPage = new ZXingScannerPage() {
+        //        DefaultOverlayTopText = "バーコードを読み取ります",
+        //        DefaultOverlayBottomText = "",
+        //    };
+        //    await Navigation.PushAsync(scanPage);
+        //    scanPage.OnScanResult += (result) => {
+        //        scanPage.IsScanning = false;
+        //        Device.BeginInvokeOnMainThread(async () => {
+        //            scanedcode = result.Text;
+        //            await Navigation.PopAsync();
+        //            //await DisplayAlert("Scan Done!", result.Text, "OK");//これは消して良い
+        //            //スキャンして得た情報を使って何かしたい場合
+        //            //ここに処理を書く
+        //        });
+        //    };
+        //}
 
         async void LightScanBtnClicked(object sender, EventArgs s) {
             var scanPage = new ZXingScannerPage() {
@@ -116,8 +132,6 @@ namespace Code_Scan_Test_by_ZXing {
                 });
             };
         }
-
-
 
 
         void BackMainPageBtnClicked(object sender, EventArgs s){

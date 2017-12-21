@@ -11,6 +11,9 @@ namespace Code_Scan_Test_by_ZXing {
             InitializeComponent();
         }
 
+        private string scanedcode;
+
+
         async void BoughtThisItemBtnClicked(object sender, EventArgs s) {
             var scanPage = new ZXingScannerPage() {
                 DefaultOverlayTopText = "バーコードを読み取ります",
@@ -19,11 +22,14 @@ namespace Code_Scan_Test_by_ZXing {
             await Navigation.PushAsync(scanPage);
 
             scanPage.OnScanResult += (result) => {
+                scanedcode = result.Text;
                 scanPage.IsScanning = false;
-
                 Device.BeginInvokeOnMainThread(async () => {
+                    await Navigation.PopAsync();
+
+                    DependencyService.Get<IMyFormsToast>().Show("LightWeghtTest:" + scanedcode);
                     GetJson gj = new GetJson();
-                    string jsonString = await gj.GetItemJsonString(result.Text);
+                    string jsonString = await gj.GetItemJsonString(scanedcode);
                     if (jsonString != "null") {
                         SearchedInfo thingInfo = gj.GetItemObjectFromJson(jsonString);
                         //userIdはとりあえず1の人固定
@@ -43,7 +49,7 @@ namespace Code_Scan_Test_by_ZXing {
                         //Postして購入済みリストに追加、次の購入日を取得
                         Next_buy_date nextBuyDate = await pj.PostBoughtThingInfo(bt);
 
-                        DependencyService.Get<IMyFormsToast>().Show("次の購入日を取得:"+ nextBuyDate.next_buy_date);
+                        DependencyService.Get<IMyFormsToast>().Show("次の購入日を取得:" + nextBuyDate.next_buy_date);
 
                         //消耗品リスト作成
                         Bought_expendable be = new Bought_expendable();
@@ -53,19 +59,14 @@ namespace Code_Scan_Test_by_ZXing {
                         //Postして消耗品リストに登録
                         Expendables postedEx = await pj.PostExpendablesInfo(be);
 
-                        DependencyService.Get<IMyFormsToast>().Show("消耗品リストに登録しました");
-
-                        //表示
-                        //await Navigation.PopAsync();
-                        //await DisplayAlert("次の購入日", nextBuyDate.next_buy_date, "OK");
+                        DependencyService.Get<IMyFormsToast>().Show("消耗品リストに登録しました: " + postedEx.created_at);
                     } else {//json null
                         DependencyService.Get<IMyFormsToast>().Show("該当の商品情報がありません!");
                     }
-                });
 
+                });
             };
         }
-
 
 
         void ShowAllItemsBtnClicked(object sender, EventArgs s) {
