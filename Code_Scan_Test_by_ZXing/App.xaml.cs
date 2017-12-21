@@ -14,6 +14,9 @@ namespace Code_Scan_Test_by_ZXing {
 
             if(!IsUserLoggedIn){
                 //Loginページへ
+                //通知設定をiOSに登録
+                DependencyService.Get<INotificationService>().Regist();
+
                 MainPage = new NavigationPage(new LoginPage());
             }else{
                 MainPage = new NavigationPage(new Code_Scan_Test_by_ZXingPage());
@@ -39,5 +42,15 @@ namespace Code_Scan_Test_by_ZXing {
     //インターフェイスの定義はIから始まる習慣があるっぽい
     public interface IMyFormsToast {
         void Show(string message);
+    }
+
+    //DependencyServiceから利用する
+    public interface INotificationService {
+        //iOS用の登録
+        void Regist();
+        //通知する
+        void On(string title, string body);
+        //通知を解除する
+        void Off();
     }
 }

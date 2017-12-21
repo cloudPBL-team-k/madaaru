@@ -151,6 +151,11 @@ namespace Code_Scan_Test_by_ZXing {
             };
         }
 
+        void NotificationBtnClicked(object sender, EventArgs e) {
+            //通知を実行
+            DependencyService.Get<INotificationService>().On("タイトル", "本文");
+        }
+
         void LoginBtnClicked(object sender, EventArgs s){
             Navigation.PushAsync(new LoginPage(), true);
         }

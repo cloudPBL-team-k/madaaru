@@ -42,6 +42,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="ItemNumEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -70,6 +74,9 @@
       <DependentUpon>ItemInfoEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
+    <Compile Include="ItemNumEdit.xaml.cs">
+      <DependentUpon>ItemNumEdit.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">

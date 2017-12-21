@@ -8,6 +8,14 @@ namespace Code_Scan_Test_by_ZXing {
 
         private string thisjancode = "1";
 
+        //public ItemInfoEditPage(Bought_thing bt){
+        //    InitializeComponent();
+        //    //商品名、個数を載せたかったがBought_thingsとSearchedInfoを持ってこれなかったのでできない
+        //    itemNumInput.Text = bt.num.ToString();
+        //}
+
+
+
         public ItemInfoEditPage(string jancode) {
             InitializeComponent();
             thisjancode = jancode;
