@@ -15,7 +15,7 @@ namespace Code_Scan_Test_by_ZXing {
             if(!IsUserLoggedIn){
                 //Loginページへ
                 //通知設定をiOSに登録
-                DependencyService.Get<INotificationService>().Regist();
+                //DependencyService.Get<INotificationService>().Regist();
 
                 MainPage = new NavigationPage(new LoginPage());
             }else{
@@ -27,6 +27,7 @@ namespace Code_Scan_Test_by_ZXing {
 
         protected override void OnStart() {
             // Handle when your app starts
+            DependencyService.Get<INotificationService>().Regist();
         }
 
         protected override void OnSleep() {
@@ -49,7 +50,7 @@ namespace Code_Scan_Test_by_ZXing {
         //iOS用の登録
         void Regist();
         //通知する
-        void On(string title, string body);
+        void On(string title,string subTitle, string body);
         //通知を解除する
         void Off();
     }

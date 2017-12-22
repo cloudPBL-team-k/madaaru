@@ -12,7 +12,7 @@ namespace Code_Scan_Test_by_ZXing.Droid {
             //iOS用なので、何もしない
         }
 
-        public void On(string title, string body) {
+        public void On(string title,string subTitle, string body) {
             Context context = Forms.Context;
             Intent intent = new Intent(context, typeof(MainActivity));
             PendingIntent pendingIntent = PendingIntent.GetActivity(context, 0, intent, 0);
@@ -21,7 +21,7 @@ namespace Code_Scan_Test_by_ZXing.Droid {
             Android.Net.Uri uri = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
 
             Notification notification = new Notification.Builder(context)
-                    .SetContentTitle(title)
+                    .SetContentTitle(title+": "+subTitle)
                     .SetSmallIcon(Resource.Drawable.icon)
                     .SetContentText(body)
                     .SetOngoing(false) //常駐するかどうか
